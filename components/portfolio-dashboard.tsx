@@ -1,54 +1,144 @@
 "use client";
 
-import { useId, useState } from "react";
-import { experience, projects, skillGroups } from "../data/portfolio";
+import { useEffect, useId, useState } from "react";
+import { experience, skillGroups } from "../data/portfolio";
 import "./portfolio-dashboard.css";
 
-function DashboardIcon({ type }: { type: "scribe" | "bridge" | "research" }) {
-  return <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-    {type === "scribe" ? <path d="M5 9v6m4-10v14m6-16v18m4-12v6" />
-      : type === "bridge" ? <><rect x="8" y="8" width="8" height="8" rx="2" /><path d="M12 3v5m0 8v5M3 12h5m8 0h5M5.5 5.5 9 9m6 6 3.5 3.5" /></>
-      : <><path d="m3 8 6-4 6 3 6-3M3 18l5-4 7 4 6-5M9 4l-1 10m7-7v11M3 8l5 6 7-7 6 6" /><circle cx="8" cy="14" r="2" /></>}
-  </svg>;
+type DashboardView = "overview" | "toolkit";
+const VIEW_STORAGE_KEY = "surya.portfolio.dashboard";
+
+function DashboardIcon({ type }: { type: "research" | "build" | "refine" }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      {type === "research" ? (
+        <>
+          <circle cx="10.5" cy="10.5" r="6.5" />
+          <path d="m15.5 15.5 4.5 4.5M8 10.5h5m-2.5-2.5v5" />
+        </>
+      ) : type === "build" ? (
+        <>
+          <rect x="7" y="7" width="10" height="10" rx="2" />
+          <path d="M9 3v4m6-4v4M9 17v4m6-4v4M3 9h4m-4 6h4m10-6h4m-4 6h4" />
+        </>
+      ) : (
+        <>
+          <path d="M19 8a7.5 7.5 0 1 0 .5 7M19 3v5h-5" />
+          <path d="m9 12 2 2 4-4" />
+        </>
+      )}
+    </svg>
+  );
+}
+
+function Arrow() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M5 12h14m-6-6 6 6-6 6" />
+    </svg>
+  );
 }
 
 export default function PortfolioDashboard() {
-  const [view, setView] = useState<"overview" | "toolkit">("overview");
+  const [view, setView] = useState<DashboardView>("overview");
   const panelId = useId();
 
-  return <aside className="dash-window" aria-label="Portfolio overview">
-    <div className="dash-window-bar">
-      <div className="dash-breadcrumb"><span className="dash-app-icon" aria-hidden="true">s.</span><span>Portfolio <span className="dash-slash">/</span> <strong>{view === "overview" ? "Overview" : "Toolkit"}</strong></span></div>
-      <span className="dash-window-menu" aria-hidden="true"><i /><i /><i /></span>
-    </div>
+  // Storage is optional. Read after hydration and only write after a user choice,
+  // so a first render cannot overwrite an existing saved preference.
+  useEffect(() => {
+    try {
+      const savedView = window.localStorage.getItem(VIEW_STORAGE_KEY);
+      if (savedView === "overview" || savedView === "toolkit") setView(savedView);
+    } catch {
+      // The panel remains usable when the browser blocks local storage.
+    }
+  }, []);
 
-    <div className="dash-content">
-      <div className="dash-view-heading"><span className="dash-label">A LOOK AT MY WORK</span><span className="dash-status"><i /> Penn State CS</span></div>
-      <dl className="dash-stats">
-        <div className="dash-stat dash-stat-teal"><dt>Experience teams</dt><dd>{String(experience.length).padStart(2, "0")}<svg viewBox="0 0 68 27" fill="none" aria-hidden="true"><circle cx="25" cy="8" r="5" /><circle cx="43" cy="8" r="5" /><path d="M15 25v-2a10 10 0 0 1 20 0v2m-2-4a10 10 0 0 1 20 2v2" /></svg></dd><span>Penn State & Wyntek</span></div>
-        <div className="dash-stat dash-stat-peach"><dt>Expected graduation</dt><dd>2027<span className="dash-stat-arrow" aria-hidden="true">↗</span></dd><span>B.S. Computer Science</span></div>
-      </dl>
+  function chooseView(nextView: DashboardView) {
+    setView(nextView);
+    try {
+      window.localStorage.setItem(VIEW_STORAGE_KEY, nextView);
+    } catch {
+      // Keep the current choice in memory when storage is unavailable.
+    }
+  }
 
-      <div className="dash-focus-panel">
-        <div className="dash-panel-top"><span className="dash-panel-title">{view === "overview" ? "The way I work" : "Behind the projects"}</span><div className="dash-segments" role="group" aria-label="Portfolio dashboard view"><button type="button" aria-pressed={view === "overview"} aria-controls={panelId} onClick={() => setView("overview")}>Overview</button><button type="button" aria-pressed={view === "toolkit"} aria-controls={panelId} onClick={() => setView("toolkit")}>Toolkit</button></div></div>
-        <div className="dash-view-content" id={panelId}>
-          {view === "overview" ? <figure className="dash-focus-map" aria-label="A workflow of research, building, and refinement">
-            <div className="dash-map-grid" aria-hidden="true" />
-            <svg className="dash-map-path" viewBox="0 0 360 130" fill="none" aria-hidden="true">
-              <defs><linearGradient id={`${panelId}-path`} x1="20" y1="100" x2="340" y2="50" gradientUnits="userSpaceOnUse"><stop stopColor="#51b8b4" stopOpacity=".25" /><stop offset=".5" stopColor="#a9f6e7" /><stop offset="1" stopColor="#f2be91" stopOpacity=".7" /></linearGradient></defs>
-              <path className="dash-path-track" d="M29 88C89 88 109 39 180 39S271 88 331 88" />
-              <path className="dash-path-glow" stroke={`url(#${panelId}-path)`} d="M29 88C89 88 109 39 180 39S271 88 331 88" />
-              <path className="dash-path-pulse" d="M29 88C89 88 109 39 180 39S271 88 331 88" />
-            </svg>
-            <div className="dash-map-node dash-map-research"><span className="dash-node-ring"><DashboardIcon type="research" /></span><span>Research</span><small>Understand the problem</small></div>
-            <div className="dash-map-node dash-map-build"><span className="dash-node-ring"><DashboardIcon type="bridge" /></span><span>Build</span><small>Make an idea tangible</small></div>
-            <div className="dash-map-node dash-map-refine"><span className="dash-node-ring"><DashboardIcon type="scribe" /></span><span>Refine</span><small>Test. Learn. Improve.</small></div>
-          </figure> : <div className="dash-toolkit"><div className="dash-toolkit-intro">Tools behind the projects</div>{skillGroups.map(group => <div className="dash-toolkit-group" key={group.name}><span>{group.name}</span><div>{group.items.slice(0, 4).map(item => <span key={item}>{item}</span>)}</div></div>)}</div>}
-        </div>
+  return (
+    <aside className="dash-window" aria-labelledby={`${panelId}-title`}>
+      <div className="dash-window-bar">
+        <span className="dash-app-icon" aria-hidden="true">sa</span>
+        <h2 id={`${panelId}-title`}>Portfolio snapshot</h2>
       </div>
 
-      <div className="dash-project-panel"><div className="dash-project-heading"><span className="dash-panel-title">On the workbench</span><a href="#work">Explore all <span aria-hidden="true">↗</span></a></div><ul className="dash-project-list">{projects.map(project => <li key={project.id}><span className={`dash-project-icon dash-project-${project.kind}`}><DashboardIcon type={project.kind} /></span><span className="dash-project-copy"><strong>{project.kind === "research" ? "Grain boundaries" : project.title}</strong><span>{project.kind === "scribe" ? "Native macOS app" : project.kind === "bridge" ? "Assistant architecture" : "ML & computer vision"}</span></span><span className="dash-project-tag">{project.kind === "research" ? "RESEARCH" : "PROJECT"}</span></li>)}</ul></div>
-    </div>
-    <div className="dash-window-footer"><span><span aria-hidden="true">⌘</span> RESEARCH MEETS SOFTWARE</span><span>SURYA / 01</span></div>
-  </aside>;
+      <div className="dash-content">
+        <dl className="dash-stats">
+          <div className="dash-stat dash-stat-teal">
+            <dt>Experience teams</dt>
+            <dd>{String(experience.length).padStart(2, "0")}</dd>
+            <dd className="dash-stat-note">Penn State & Wyntek</dd>
+          </div>
+          <div className="dash-stat dash-stat-peach">
+            <dt>Expected graduation</dt>
+            <dd>2027</dd>
+            <dd className="dash-stat-note">B.S. Computer Science</dd>
+          </div>
+        </dl>
+
+        <div className="dash-segments" role="group" aria-label="Portfolio dashboard view">
+          <button
+            type="button"
+            aria-pressed={view === "overview"}
+            aria-controls={panelId}
+            onClick={() => chooseView("overview")}
+          >
+            Overview
+          </button>
+          <button
+            type="button"
+            aria-pressed={view === "toolkit"}
+            aria-controls={panelId}
+            onClick={() => chooseView("toolkit")}
+          >
+            Toolkit
+          </button>
+        </div>
+
+        <div className="dash-view-content" id={panelId}>
+          {view === "overview" ? (
+            <div className="dash-overview">
+              <h3>Research. Build. Refine.</h3>
+              <ol className="dash-steps" aria-label="My approach to projects">
+                <li>
+                  <span className="dash-node-ring"><DashboardIcon type="research" /></span>
+                  <span>Research</span>
+                </li>
+                <li>
+                  <span className="dash-node-ring"><DashboardIcon type="build" /></span>
+                  <span>Build</span>
+                </li>
+                <li>
+                  <span className="dash-node-ring"><DashboardIcon type="refine" /></span>
+                  <span>Refine</span>
+                </li>
+              </ol>
+              <p>Computer vision research and practical tools for macOS.</p>
+            </div>
+          ) : (
+            <div className="dash-toolkit">
+              <h3>Tools behind the projects</h3>
+              {skillGroups.map(group => (
+                <div className="dash-toolkit-group" key={group.name}>
+                  <h4>{group.name}</h4>
+                  <div>
+                    {group.items.slice(0, 3).map(item => <span key={item}>{item}</span>)}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
+        <a className="dash-explore" href="#work">Explore selected work <Arrow /></a>
+      </div>
+    </aside>
+  );
 }

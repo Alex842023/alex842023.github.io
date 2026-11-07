@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import ErrorBoundary from "../components/error-boundary";
+import { THEME_INIT_SCRIPT } from "../lib/theme-init";
 
 export const metadata: Metadata = {
   title: "Surya Aketi | Computer Science & Machine Learning",
@@ -16,8 +18,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className="antialiased">{children}</body>
+    <html lang="en" suppressHydrationWarning>
+      <head><script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} /></head>
+      <body className="antialiased"><ErrorBoundary>{children}</ErrorBoundary></body>
     </html>
   );
 }

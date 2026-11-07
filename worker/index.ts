@@ -1,9 +1,10 @@
 import handler from "vinext/server/fetch-handler";
 import { runWithConnectorBinding } from "../lib/connector-context";
 import type { ConnectorBinding } from "../lib/connector-contract.mjs";
+import { applyResponsePolicy, friendlyFailure } from "./response-policy";
 
 const worker = {
-  fetch(request: Request, env: Cloudflare.Env, ctx: ExecutionContext<{ CONNECTORS?: ConnectorBinding }>) {
+  async fetch(request: Request, env: Cloudflare.Env, ctx: ExecutionContext<{ CONNECTORS?: ConnectorBinding }>) {
     let binding = ctx.props?.CONNECTORS;
     // Local preview emulates the same request-scoped capability. This branch and
     // the auxiliary service binding are absent from production builds.
@@ -23,7 +24,14 @@ const worker = {
         },
       };
     }
-    return runWithConnectorBinding(binding, () => handler.fetch(request, env, ctx));
+    try {
+      const response = await runWithConnectorBinding(binding, () => handler.fetch(request, env, ctx));
+      if (response.status >= 500) return friendlyFailure(request);
+      return applyResponsePolicy(request, response);
+    } catch (error) {
+      console.error("Portfolio request failed", error);
+      return friendlyFailure(request);
+    }
   },
 };
 

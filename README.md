@@ -88,3 +88,16 @@ Keep `vite.config.ts`, `worker/`, and `scripts/` intact for the Sites target. A 
 | `npm run preview:github` | Preview the static GitHub Pages build locally |
 
 No API keys are required for the portfolio. Do not commit `.env*`, `.dev.vars*`, keys, access tokens, or local tool state.
+
+
+## Usability and reliability
+
+The portfolio uses 16px body copy and a 14px minimum for labels at the browser’s default text size, with rem units for text scaling. Controls have at least 44px touch targets. Layouts reflow on small screens and with larger text. Teal, aqua, and warm orange are used in both themes; icons are SVG.
+
+The color selector offers Dark, Light, and System. Its choice, the dashboard view, and expanded résumé sections are saved locally on the visitor’s device. If local storage is unavailable, the page remains usable. Reduced-motion settings are respected and touch controls provide press feedback.
+
+The static build includes complete résumé-based initial content before JavaScript loads. It also remains readable if JavaScript is blocked. Client and server failures provide friendly retry, résumé, and contact options. The portfolio has no contact form, text inputs, submit actions, or loading spinners.
+
+Content-fingerprinted assets use immutable browser caching on Sites; private HTML and React navigation responses remain uncached. The résumé revalidates so a replaced file is current. GitHub Pages response caching is controlled by GitHub. No service worker or offline cache of private pages is installed.
+
+Run `node scripts/check-reliability.mjs` for focused caching, fallback-content, and failure-response checks. `npm run build:github` and the normal Sites build validate both targets.
