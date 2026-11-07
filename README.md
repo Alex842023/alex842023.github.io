@@ -1,6 +1,6 @@
 # Surya Aketi — Portfolio
 
-A responsive portfolio for Surya Aketi's projects, research, experience, skills, and résumé. Profile content is based on the supplied résumé and can be expanded with additional project context and achievements.
+A responsive portfolio for Surya Aketi's projects, research, experience, skills, and résumé. Its dark teal dashboard theme uses aqua accents, warm peach headings, layered panels, and subtle animation with reduced-motion support. Profile content is based on the supplied résumé and can be expanded with additional project context and achievements.
 
 The same page supports two deployment targets:
 
@@ -38,6 +38,8 @@ Expand each experience entry with responsibilities and achievements. Expand each
 | `data/portfolio.ts` | Editable profile and portfolio content |
 | `app/page.tsx` | Sections, expandable content, and interactions |
 | `app/globals.css` | Typography, spacing, colors, and mobile layouts |
+| `components/portfolio-dashboard.tsx` | Interactive Overview/Toolkit dashboard in the hero |
+| `components/portfolio-dashboard.css` | Scoped dashboard styling and workflow animation |
 | `app/layout.tsx` | Sites page title and description |
 | `github/index.html` | GitHub Pages title, description, and browser theme color |
 | `public/favicon.svg` | Browser icon |
