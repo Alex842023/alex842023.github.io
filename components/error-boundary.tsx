@@ -6,8 +6,8 @@ import { profile } from "../data/portfolio";
 type Props = { children: ReactNode };
 
 export function FriendlyError({ retry }: { retry: () => void }) {
-  return <section className="recovery-panel" role="alert" style={{ margin: "2rem auto", maxWidth: "42rem", padding: "1.5rem", border: "1px solid var(--line, #31525b)", borderRadius: "1rem", background: "var(--panel, #10262d)", color: "var(--ink, #e1eeeb)", lineHeight: 1.7 }}>
-    <h1 style={{ fontSize: "clamp(1.6rem, 5vw, 2.2rem)", lineHeight: 1.2, letterSpacing: "-.03em", margin: "0 0 1rem", color: "var(--peach, #ffcc9b)" }}>Let’s try that again.</h1>
+  return <section className="recovery-panel" role="alert" style={{ margin: "2rem auto", maxWidth: "42rem", padding: "1.5rem", border: "1px solid var(--line, #4b4330)", borderRadius: "1rem", background: "var(--panel, #151512)", color: "var(--ink, #f2eee4)", lineHeight: 1.7 }}>
+    <h1 style={{ fontSize: "clamp(1.6rem, 5vw, 2.2rem)", lineHeight: 1.2, letterSpacing: "-.03em", margin: "0 0 1rem", color: "var(--peach, #f1d99b)" }}>Let’s try that again.</h1>
     <p style={{ fontSize: "1rem", margin: "0 0 1rem" }}>This part of the portfolio couldn’t load. You can retry, download my résumé, or contact me directly.</p>
     <div style={{ display: "flex", flexWrap: "wrap", gap: ".75rem", alignItems: "center" }}>
       <button type="button" className="button primary" onClick={retry} style={{ minHeight: 44, minWidth: 44 }}>Try again</button>

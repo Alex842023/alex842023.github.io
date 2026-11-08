@@ -1,7 +1,7 @@
 // Global/server error pages may render without the application stylesheet.
 export const STANDALONE_ERROR_STYLES = `
-  :root{color-scheme:dark;--paper:#081518;--ink:#e4f0ed;--muted:#a3babd;--blue:#82dfd1;--peach:#ffd0a3;--line:#365259;--panel:#10262d;--on-accent:#092f30}
-  :root[data-theme="light"]{color-scheme:light;--paper:#eef4f2;--ink:#172f33;--muted:#4c656b;--blue:#11695f;--peach:#935426;--line:#b8ceca;--panel:#ffffff;--on-accent:#ffffff}
+  :root{color-scheme:dark;--paper:#0b0b0a;--ink:#f2eee4;--muted:#bbb5a7;--blue:#e2c16d;--peach:#f1d99b;--line:#4b4330;--panel:#151512;--on-accent:#171407}
+  :root[data-theme="light"]{color-scheme:light;--paper:#f7f3e8;--ink:#252219;--muted:#68604d;--blue:#796020;--peach:#755719;--line:#c8bb97;--panel:#fffdf5;--on-accent:#fffdf5}
   *{box-sizing:border-box}body{margin:0;padding:1rem;background:var(--paper);color:var(--ink);font:1rem/1.7 system-ui,sans-serif;overflow-wrap:anywhere}
   .recovery-panel{max-width:40rem;margin:10vh auto;padding:1.5rem;border:1px solid var(--line);border-radius:1rem;background:var(--panel)}
   .recovery-panel h1{font-size:clamp(1.75rem,6vw,2.5rem);line-height:1.2;color:var(--peach);margin:0 0 1rem}.recovery-panel p{margin:0 0 1rem}
