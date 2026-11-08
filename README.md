@@ -101,3 +101,26 @@ The static build includes complete résumé-based initial content before JavaScr
 Content-fingerprinted assets use immutable browser caching on Sites; private HTML and React navigation responses remain uncached. The résumé revalidates so a replaced file is current. GitHub Pages response caching is controlled by GitHub. No service worker or offline cache of private pages is installed.
 
 Run `node scripts/check-reliability.mjs` for focused caching, fallback-content, and failure-response checks. `npm run build:github` and the normal Sites build validate both targets.
+
+## Terminal development workflow
+
+This portfolio is intended to be maintained at `suryaaketi/suryaaketi.github.io`, with `main` as its publishing branch. Work in this checkout, keep changes focused, and use a descriptive commit for each real improvement.
+
+Before editing, check for local changes and synchronize with the remote:
+
+```sh
+git status
+git pull --ff-only origin main
+```
+
+After editing, review the diff, run the checks appropriate to the change, stage the intended files, and commit. Then upload the commit:
+
+```sh
+git diff
+npm run build:github
+git add <files-you-changed>
+git commit -m "Describe the improvement"
+git push origin main
+```
+
+The included GitHub Actions workflow builds and publishes the website after pushes to `main`. GitHub associates commits with the email in the repository's local Git configuration; use an address linked to the intended GitHub account or that account's GitHub-provided noreply address.
