@@ -1,6 +1,6 @@
 # Surya Aketi — Portfolio
 
-A responsive portfolio for Surya Aketi's projects, research, experience, skills, and résumé. Its black and gold theme pairs the supplied Surya Aketi emblem with warm gold accents, charcoal panels, and subtle animation with reduced-motion support. Profile content is based on the supplied résumé and can be expanded with additional project context and achievements.
+A responsive portfolio for Surya Aketi's projects, research, experience, skills, and résumé. Its black and gold theme pairs the supplied Surya Aketi emblem with a full-page charcoal gradient and subtle grain, warm gold accents, and charcoal panels. The artwork edges blend into the page, and reduced-motion preferences are respected. Profile content is based on the supplied résumé and can be expanded with additional project context and achievements.
 
 The same page supports two deployment targets:
 
@@ -93,7 +93,7 @@ No API keys are required for the portfolio. Do not commit `.env*`, `.dev.vars*`,
 
 ## Usability and reliability
 
-The portfolio uses 16px body copy and a 14px minimum for labels at the browser’s default text size, with rem units for text scaling. Controls have at least 44px touch targets. Layouts reflow on small screens and with larger text. Both themes use a warm gold palette; icons are SVG. The original name artwork is in `public/surya-aketi-emblem.png`, displayed as an accessible heading with intrinsic dimensions to avoid layout shifts.
+The portfolio uses 16px body copy and a 14px minimum for labels at the browser’s default text size, with rem units for text scaling. Controls have at least 44px touch targets. Layouts reflow on small screens and with larger text. Both themes use a warm gold palette; icons are SVG. The original name artwork is in `public/surya-aketi-emblem.png`, displayed as an accessible heading with intrinsic dimensions to avoid layout shifts. `public/site-background.css` supplies the shared charcoal lighting, grain, and artwork edge blending for both publishing targets; the light theme uses a warm cream version.
 
 The color selector offers Dark, Light, and System. Its choice, the dashboard view, and expanded résumé sections are saved locally on the visitor’s device. If local storage is unavailable, the page remains usable. Reduced-motion settings are respected and touch controls provide press feedback.
 

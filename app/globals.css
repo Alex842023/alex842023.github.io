@@ -73,7 +73,7 @@ a>svg, button>svg { width: 1.25rem; height: 1.25rem; flex-shrink: 0; }
 .eyebrow { display: flex; align-items: center; flex-wrap: wrap; gap: .5rem; font: .875rem/1.7 var(--mono); letter-spacing: .06em; color: var(--muted); }
 .blue-dot { flex-shrink: 0; width: .375rem; height: .375rem; border-radius: 50%; background: var(--blue); }
 h1 { font-size: clamp(2.75rem, 5.2vw, 4.5rem); line-height: 1.08; font-weight: 650; letter-spacing: -.055em; margin: 1rem 0 1.25rem; color: var(--peach); }
-.hero-emblem { margin: 1rem 0 1.25rem; max-width: 36rem; background: #111110; border-radius: .625rem; overflow: hidden; }
+.hero-emblem { margin: 1rem 0 1.25rem; max-width: 36rem; }
 .hero-emblem img { display: block; width: 100%; height: auto; }
 em { font: inherit; color: var(--blue); }
 .hero-description { max-width: 30rem; color: var(--muted); font-size: 1rem; line-height: 1.8; }
