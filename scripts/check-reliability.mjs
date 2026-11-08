@@ -73,6 +73,8 @@ for (const project of data.projects) assert.ok(initialHtml.includes(project.titl
 for (const job of data.experience) assert.ok(initialHtml.includes(job.company), `Missing initial experience: ${job.company}`);
 assert.match(initialHtml, /href="\.\/Surya_Aketi_Resume\.pdf"/);
 assert.match(initialHtml, /mailto:suryaaketi@gmail.com/);
+for (const stream of data.researchStudy.workstreams) assert.ok(initialHtml.includes(`id="initial-research-${stream.id}"`), `Missing no-script research topic: ${stream.title}`);
+assert.doesNotMatch(initialHtml, /<(?:pre|code)\b/i);
 assert.match(initialHtml, /<details>/);
 assert.doesNotMatch(initialHtml, /<form|<input|spinner/i);
 console.log("PASS: safe caching, private-page handling, friendly errors, HEAD responses, and complete no-script portfolio content.");

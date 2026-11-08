@@ -15,3 +15,7 @@ The user wants this portfolio maintained through terminal Git commits and pushes
 The user explicitly does not want organization access or organization files read. Restrict GitHub operations to `suryaaketi/suryaaketi.github.io`. Do not list, open, fetch, or read organization repositories.
 
 Terminal Git authentication uses a dedicated write-enabled SSH deploy key registered only on this personal portfolio repository. Its private key remains outside this checkout and the repo-local `core.sshCommand` selects that identity exclusively. Do not start standard GitHub CLI OAuth login: its minimum organization-reading scope conflicts with the user's requested boundary.
+
+## Public research content
+
+The user wants the research internship explained through high-level contributions and purposes only. Do not publish internship source code, submitted notebooks, team artifacts, or implementation recipes. Expand the résumé-backed case study in `data/portfolio.ts`; keep the six-image scope and exact meaning of the reported 8.32% result.

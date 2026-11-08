@@ -83,6 +83,103 @@ export const projects: Project[] = [
   },
 ];
 
+export const researchStudy = {
+  title: "Inside the research.",
+  intro:
+    "At Penn State, I built model-training, image-analysis, and evaluation workflows to study grain-boundary segmentation in microscopy images. Each part helped examine the boundaries, the predictions, or the annotations used to assess them.",
+  question:
+    "How can learned models and classical image-analysis methods help identify grain boundaries and assess the annotations used to evaluate them?",
+  finding: {
+    value: "8.32%",
+    title: "Boundary evidence beyond Sobel",
+    detail:
+      "Across six annotated microscopy images, phase congruency detected an average 8.32% of annotated boundary pixels missed by Sobel. The result is specific to this six-image detector comparison.",
+  },
+  workstreams: [
+    {
+      id: "unet-segmentation",
+      title: "U-Net segmentation models",
+      tools: ["TensorFlow / Keras", "U-Net"],
+      built:
+        "Trained and evaluated U-Net models for grain-boundary segmentation, comparing training and validation splits with precision, recall, F1, IoU, and prediction overlays.",
+      purpose:
+        "Explore a learned approach to finding boundaries and inspect where predictions align with, miss, or extend beyond the annotations.",
+    },
+    {
+      id: "edge-detection",
+      title: "Sobel & Canny baselines",
+      tools: ["Python", "OpenCV"],
+      built:
+        "Developed Sobel and Canny image-processing pipelines to identify potential boundaries in microscopy images.",
+      purpose:
+        "Establish classical edge-detection baselines for comparison with learned segmentation and other boundary-analysis methods.",
+    },
+    {
+      id: "phase-congruency",
+      title: "Phase congruency",
+      tools: ["Python", "Image analysis"],
+      built:
+        "Developed a phase-congruency pipeline and compared its boundary detections with Sobel against annotated images.",
+      purpose:
+        "Explore a complementary detector that is less dependent on image contrast and examine which annotated boundaries it identifies beyond a gradient-based baseline.",
+    },
+    {
+      id: "multiscale-shannon",
+      title: "Multiscale Shannon entropy",
+      tools: ["Python", "Entropy analysis"],
+      built:
+        "Developed a multiscale Shannon entropy pipeline as part of the boundary-evidence and annotation-quality analysis.",
+      purpose:
+        "Examine changes in image complexity at multiple scales as another signal to compare with detector outputs and annotations.",
+    },
+    {
+      id: "two-dimensional-entropy",
+      title: "2D entropy",
+      tools: ["Python", "Entropy analysis"],
+      built:
+        "Developed a 2D entropy pipeline for microscopy image analysis alongside the other detector and entropy-based approaches.",
+      purpose:
+        "Explore another measure of image structure when assessing possible boundary evidence and the quality of existing annotations.",
+    },
+    {
+      id: "tsallis-entropy",
+      title: "Tsallis entropy",
+      tools: ["Python", "Entropy analysis"],
+      built:
+        "Developed a Tsallis entropy pipeline as an alternative entropy-based view of the microscopy images.",
+      purpose:
+        "Compare a generalized entropy measure with Shannon-based approaches while investigating boundary evidence and annotation quality.",
+    },
+    {
+      id: "detector-benchmarking",
+      title: "Detector benchmarking",
+      tools: ["Threshold sweeps", "Evaluation"],
+      built:
+        "Benchmarked detectors across six annotated images using threshold sweeps and one-pixel-tolerant evaluation.",
+      purpose:
+        "Compare methods across detection settings while allowing small spatial differences between detector outputs and annotated boundary lines.",
+    },
+    {
+      id: "annotation-review",
+      title: "Annotation masks & visual reporting",
+      tools: ["PNG / SVG", "Visual analysis"],
+      built:
+        "Created and analyzed annotation masks, prediction overlays, and visual comparisons, and documented quantitative results for the research team.",
+      purpose:
+        "Make detections and annotations easier to compare, support annotation-quality review, and communicate findings alongside summary metrics.",
+    },
+    {
+      id: "gpu-experiments",
+      title: "GPU experiments on ROAR",
+      tools: ["Linux / Bash", "SLURM", "ROAR HPC"],
+      built:
+        "Ran GPU training on Penn State's ROAR cluster, managed Python environments, monitored experiments, and troubleshot software dependencies.",
+      purpose:
+        "Support the training experiments with scheduled GPU computing and working software environments.",
+    },
+  ],
+};
+
 export const experience = [
   {
     company: "Penn State University",

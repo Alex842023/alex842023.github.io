@@ -38,6 +38,7 @@ Expand each experience entry with responsibilities and achievements. Expand each
 | `data/portfolio.ts` | Editable profile and portfolio content |
 | `app/page.tsx` | Sections, expandable content, and interactions |
 | `app/globals.css` | Typography, spacing, colors, and mobile layouts |
+| `components/research-case-study.tsx` | Public overview of research work and its purpose; no research source code |
 | `components/portfolio-dashboard.tsx` | Interactive Overview/Toolkit dashboard in the hero |
 | `components/portfolio-dashboard.css` | Scoped dashboard styling and workflow animation |
 | `app/layout.tsx` | Sites page title and description |
@@ -128,3 +129,7 @@ The included GitHub Actions workflow builds and publishes the website after push
 ### Repository-only authentication
 
 Terminal Git access uses a dedicated SSH deploy key attached only to the personal `suryaaketi.github.io` repository. The private key is stored outside the checkout and selected by this checkout's local Git configuration. No organization OAuth permissions are required. Repository creation and Pages settings can be managed in the personal repository's browser interface.
+
+### Research content
+
+The `researchStudy` object in `data/portfolio.ts` supplies the detailed Penn State case study and its no-script fallback. Each workstream explains the contribution and its purpose. Keep this section at a public overview level: do not add internship source code, submitted notebooks, team artifacts, or implementation instructions. Preserve the scope of the reported six-image comparison when editing the 8.32% finding.
