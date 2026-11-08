@@ -124,3 +124,7 @@ git push origin main
 ```
 
 The included GitHub Actions workflow builds and publishes the website after pushes to `main`. GitHub associates commits with the email in the repository's local Git configuration; use an address linked to the intended GitHub account or that account's GitHub-provided noreply address.
+
+### Repository-only authentication
+
+Terminal Git access uses a dedicated SSH deploy key attached only to the personal `suryaaketi.github.io` repository. The private key is stored outside the checkout and selected by this checkout's local Git configuration. No organization OAuth permissions are required. Repository creation and Pages settings can be managed in the personal repository's browser interface.

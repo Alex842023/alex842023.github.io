@@ -9,3 +9,9 @@ The user wants this portfolio maintained through terminal Git commits and pushes
 - Push authorized portfolio changes with normal terminal Git commands. The GitHub Pages workflow publishes pushes to `main`.
 - Keep credentials out of source and never create filler or empty commits to inflate activity.
 - The existing `.openai/hosting.json` belongs to the separate private Sites deployment. Preserve its project ID and audience. Its source helper pushes to a direct URL and does not replace the GitHub `origin` remote.
+
+## GitHub access boundary
+
+The user explicitly does not want organization access or organization files read. Restrict GitHub operations to `suryaaketi/suryaaketi.github.io`. Do not list, open, fetch, or read organization repositories.
+
+Terminal Git authentication uses a dedicated write-enabled SSH deploy key registered only on this personal portfolio repository. Its private key remains outside this checkout and the repo-local `core.sshCommand` selects that identity exclusively. Do not start standard GitHub CLI OAuth login: its minimum organization-reading scope conflicts with the user's requested boundary.
